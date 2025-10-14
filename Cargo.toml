@@ -1,0 +1,23 @@
+[package]
+name = "aWASMcli"
+version = "0.1.0"
+edition = "2021"
+description = "A CLI for aWASMlib"
+license = "MIT"
+repository = "https://github.com/5EUS/aWASMcli"
+homepage = "https://github.com/5EUS/aWASMcli"
+readme = "README.md"
+
+[dependencies]
+awasmlib = { git = "https://github.com/5EUS/aWASMlib" }
+
+[profile.dev]
+opt-level = 0
+debug = true
+codegen-units = 256
+
+[profile.dev.package."*"]
+opt-level = 0
+
+[dev-dependencies]
+tempfile = "3"
