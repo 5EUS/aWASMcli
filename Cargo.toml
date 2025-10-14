@@ -10,6 +10,7 @@ readme = "README.md"
 
 [dependencies]
 awasmlib = { git = "https://github.com/5EUS/aWASMlib" }
+clap = { version = "4.0", features = ["derive"] }
 
 [profile.dev]
 opt-level = 0
