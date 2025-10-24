@@ -30,7 +30,11 @@ pub enum Commands {
         name: Option<String>,
     },
     /// Show plugin capabilities (cached by default)
-    Capabilities,
+    Capabilities {
+        /// Bypass cache and refresh capabilities from plugins
+        #[arg(long)]
+        refresh: bool,
+    },
     /// Show allowed hosts per plugin
     AllowedHosts,
     /// Search for media
