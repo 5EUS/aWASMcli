@@ -9,11 +9,12 @@
             "request": "launch",
             "name": "Debug aWASMcli",
             "program": "${workspaceFolder}/target/debug/aWASMcli",
-            "args": ["capabilities"],
+            "args": ["allowed-hosts", "--plugin", "mangadex_plugin"],
             "cwd": "${workspaceFolder}",
             "stopOnEntry": false,
             "env": {
-                "RUST_LOG": "info,wasmtime_wasi_http=trace,wasmtime_wasi=info,awasmlib=debug"
+                "RUST_LOG": "info,wasmtime_wasi_http=trace,wasmtime_wasi=info,awasmlib=debug",
+                // "RUST_BACKTRACE": "1"
             }
         }
     ]

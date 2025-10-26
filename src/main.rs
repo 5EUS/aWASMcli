@@ -9,9 +9,7 @@ use crate::cli::{Commands, DownloadCmd, SeriesCmd};
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let mut handle = Handle::new().await?;
-    handle.connect().await?;
-    handle.load_plugins().await?;
+    let handle = Handle::new().await?;
 
     let cli = Cli::parse();
 
@@ -42,8 +40,21 @@ async fn main() -> Result<()> {
                 println!("{}:\n  media:  {}\n  units:  {}\n  assets: {}", name, media.join(", "), units.join(", "), assets.join(", "));
             }
         }
-        Commands::AllowedHosts => {
-            // Allowed hosts logic
+        Commands::AllowedHosts { plugin } => {
+            let plugins = if let Some(plugin_name) = plugin {
+                vec![plugin_name]
+            } else {
+                handle.agg.pm.list_plugins()
+            };
+            for plugin_name in plugins {
+                let hosts = handle.agg.pm.get_allowed_hosts(&plugin_name).await?;
+                if !hosts.is_empty() {
+                    println!("{} allowed hosts:", plugin_name);
+                    for host in hosts {
+                        println!("  - {}", host);
+                    }
+                }
+            }
         }
         Commands::Media { query, refresh, json, plugin } => {
             // Media logic

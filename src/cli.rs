@@ -36,7 +36,11 @@ pub enum Commands {
         refresh: bool,
     },
     /// Show allowed hosts per plugin
-    AllowedHosts,
+    AllowedHosts {
+        /// Plugin name to get allowed hosts for
+        #[arg(long)]
+        plugin: Option<String>,
+    },
     /// Search for media
     Media {
         /// Query to search for
