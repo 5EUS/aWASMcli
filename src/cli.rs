@@ -1,22 +1,9 @@
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
-#[command(name = "touring")]
+#[command(name = "aWASMcli")]
 #[command(about = "A CLI for aWASMlib.", long_about = None)]
 pub struct Cli {
-    /// Database connection string (sqlite/postgres/mysql). If not provided, a sensible
-    /// default is used (sqlite file in user data dir). Can also be set via TOURING_DATABASE_URL.
-    #[arg(long = "database-url")]
-    pub database_url: Option<String>,
-
-    /// Skip running migrations on startup. Can also be set via TOURING_NO_MIGRATIONS.
-    #[arg(long = "no-migrations", default_value_t = false)]
-    pub no_migrations: bool,
-
-    /// Directory to load plugins (.wasm) from. Can also be set via TOURING_PLUGINS_DIR.
-    #[arg(long = "plugins-dir")]
-    pub plugins_dir: Option<String>,
-
     #[command(subcommand)]
     pub command: Commands,
 }
